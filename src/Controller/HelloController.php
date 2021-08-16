@@ -2,28 +2,31 @@
 
 namespace App\Controller;
 
-use App\Taxes\Calculator;
+use App\Taxes\Detector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HelloController
 {
-    protected $calculator;
+    // protected $calculator;
 
-    public function __construct(Calculator $calculator)
-    {
-        $this->calculator = $calculator;
-    }
+    // public function __construct(Calculator $calculator)
+    // {
+    //     $this->calculator = $calculator;
+    // }
+
+
 
     /**
      * @route("/", name="index")
      */
-    public function index()
+    public function index(Detector $detector)
     {
-        $tva = $this->calculator->cacul('100');
-        dd($tva);
-        return new Response("HelloController");
+        dump($detector->detect(101));
+        dump($detector->detect(10));
+        // $tva = $this->calculator->cacul(100);
+        return new Response("hello world");
     }
 
     /**
