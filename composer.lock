@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5dd98eab6ee212b8e62bd9c37029d7bd",
+    "content-hash": "3118ec2033637ff2d92890c5a17d6878",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -1974,6 +1974,60 @@
                 "source": "https://github.com/liorchamla/faker-prices/tree/2.0.0"
             },
             "time": "2020-12-29T08:40:08+00:00"
+        },
+        {
+            "name": "mmo/faker-images",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/morawskim/faker-images.git",
+                "reference": "f92b66e0c3771891280786ad3a1c4fab21f8e34d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/morawskim/faker-images/zipball/f92b66e0c3771891280786ad3a1c4fab21f8e34d",
+                "reference": "f92b66e0c3771891280786ad3a1c4fab21f8e34d",
+                "shasum": ""
+            },
+            "require": {
+                "fzaninotto/faker": "~1.4",
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7",
+                "squizlabs/php_codesniffer": "^2.9.2"
+            },
+            "suggest": {
+                "ext-curl": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mmo\\Faker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcin Morawski",
+                    "email": "marcin@morawskim.pl"
+                }
+            ],
+            "description": "Different images provider for Faker",
+            "keywords": [
+                "faker",
+                "images",
+                "picsum",
+                "provider"
+            ],
+            "support": {
+                "issues": "https://github.com/morawskim/faker-images/issues",
+                "source": "https://github.com/morawskim/faker-images/tree/v0.3.0"
+            },
+            "time": "2021-01-24T10:59:29+00:00"
         },
         {
             "name": "nikic/php-parser",
