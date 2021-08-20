@@ -10,10 +10,10 @@
 {% block body %}
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item">
-			<a href="#">Acceuil</a>
+			<a href="{{path('homepage')}}">Acceuil</a>
 		</li>
 		<li class="breadcrumb-item">
-			<a href="#">{{category.name}}</a>
+			<a href="{{ path('product_category', {'slug': category.slug})}}">{{category.name}}</a>
 		</li>
 	</ol>
 
@@ -31,7 +31,7 @@
 							&euro;)</h4>
 						<span class="badge bg-info">{{ p.category.name }}</span>
 						<p class="card-text">{{ p.shortDescription }}</p>
-						<a href="#" class="btn btn-primary btn-sm">Détails</a>
+						<a href="{{ path('product_show', { 'category_slug': p.category.slug, 'slug': p.slug }) }}" class="btn btn-primary btn-sm">Détails</a>
 						<a href="#" class="btn btn-success btn-sm">Ajouter</a>
 					</div>
 				</div>

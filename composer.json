@@ -78,7 +78,7 @@
             "require": "5.1.*"
         }
     },
-    "require-dev": {
+"require-dev": {
         "mbezhanov/faker-provider-collection": "^1.2"
     }
 }

@@ -7,7 +7,7 @@
 {% block body %}
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item">
-			<a href="#">Acceuil</a>
+			<a href="{{path('homepage')}}">Acceuil</a>
 		</li>
 		<li class="breadcrumb-item">
 			<a href="{{ path('product_category', {'slug': product.category.slug})}}">{{product.category.name}}</a>
