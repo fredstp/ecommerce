@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
-use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormFactoryBuilderInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductController extends AbstractController
 {
@@ -55,8 +57,21 @@ class ProductController extends AbstractController
     /**
      * @Route("/admin/product/create", name="product_create")
      */
-    public function create()
+    public function create(FormFactoryInterface $factory)
     {
-        return $this->render('product/create.html.twig');
+        $builder = $factory->createBuilder();
+
+        $builder->add('name')
+            ->add('shortdescirption')
+            ->add('price')
+            ->add('category');
+
+        $form = $builder->getForm();
+
+        $formview = $form->createView();
+
+        return $this->render('product/create.html.twig', [
+            'formView' => $formview
+        ]);
     }
 }
