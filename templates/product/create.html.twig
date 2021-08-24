@@ -7,4 +7,16 @@
 {% block body %}
 	<h1>Nouveau produit</h1>
 
-	{{form(formView)}}{% endblock %}
+	<div class="row">
+		<div class="col">
+			{{form_row(formView.name)}}
+			{{form_row(formView.price)}}
+
+		</div>
+		<div class="col">
+			{{form_row(formView.category)}}
+			{{form_row(formView.shortDescription)}}
+
+		</div>
+	</div>
+{% endblock %}
