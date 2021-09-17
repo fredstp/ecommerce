@@ -5,12 +5,10 @@ namespace App\Controller\Purchase;
 use App\Entity\User;
 use Twig\Environment;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class PurchasesListController extends AbstractController
 {
@@ -28,6 +26,7 @@ class PurchasesListController extends AbstractController
 
     /**
      * @Route("/purchases", name="purchase_index")
+     * @IsGranted("ROLE_USER", message="Vous devez être connecté pour accéder à vos commandes")
      */
     public function index()
     {
@@ -37,19 +36,17 @@ class PurchasesListController extends AbstractController
         /**
          * @var User
          */
-        $user = $this->security->getUser();
+        $user = $this->getUser();
 
-        if (!$user) {
-            throw new AccessDeniedException("Vous devez être connecté pour accéder à vos commandes !");
-        }
+
 
         // 2. Nous voulons savoir QUI est connectée -> Security
 
         // 3. Nous voulons passer l'utilisateur connecté à twig afin d'afficher ses commandes 
         // Environment de twig / Response
-        $html = $this->twig->render('purchase/index.html.twig', [
+
+        return $this->render('purchase/index.html.twig', [
             'purchases' => $user->getPurchases()
         ]);
-        return new Response($html);
     }
 }
