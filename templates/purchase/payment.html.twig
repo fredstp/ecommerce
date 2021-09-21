@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Payez votre commande avec Stripe
+{% endblock %}
+
+{% block body %}
+	<H1>Payez votre commande avec Stripe</H1>
+
+	<form id="payment-form">
+		<div id="card-element"><!--Stripe.js injects the Card Element--></div>
+		<button id="submit" class="btn btn-success">
+			<div class="spinner hidden" id="spinner"></div>
+			<span id="button-text">Payer avec Stripe</span>
+		</button>
+	</form>
+{% endblock %}
+
+{% block javascripts %}
+
+	{{ parent() }}
+	<script src="https://js.stripe.com/v3/"></script>
+	<script>
+		const clientSecret = '{{ clientSecret }}'
+const stripe = Stripe("pk_test_oKhSR5nslBRnBZpjO6KuzZeX");
+
+const elements = stripe.elements();
+
+var card = elements.create("card");
+// Stripe injects an iframe into the DOM
+card.mount("#card-element");
+card.on("change", function (event) { // Disable the Pay button if there are no card details in the Element
+document.querySelector("button").disabled = event.empty;
+document.querySelector("#card-error").textContent = event.error ? event.error.message : "";
+});
+var form = document.getElementById("payment-form");
+form.addEventListener("submit", function (event) {
+event.preventDefault();
+
+// Complete payment when the submit button is clicked
+payWithCard(stripe, card, data.clientSecret);
+});
+
+var payWithCard = function (stripe, card, clientSecret) {
+loading(true);
+
+stripe.confirmCardPayment(clientSecret, {
+payment_method: {
+card: card
+}
+}).then(function (result) {
+if (result.error) { // Show error to your customer
+console.log(result.error.message);
+} else { // The payment succeeded
+window.location.href = "{{ url('purchase_payment_success',{'id':purchase.id }) }}";
+}
+});
+};
+	</script>
+
+{% endblock %}
